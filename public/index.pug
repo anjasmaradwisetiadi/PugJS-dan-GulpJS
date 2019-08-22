@@ -1,0 +1,53 @@
+
+mixin sidebar (site,nama)
+    a(href=site ,(onclick)="w3_close()" class= 'w3-bar-item w3-button w3-hover-white')=nama
+html 
+    head W3.CSS Template
+
+    link(rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins")
+    link(rel="stylesheet", href="style.css")
+
+    body
+        
+        // Sidebar/menu
+        nav.w3-sidebar.w3-red.w3-collapse.w3-top.w3-large.w3-padding#mySidebar(style="z-index:3;width:300px;font-weight:bold;")
+
+            br
+            |
+            a.w3-button.w3-hide-large.w3-display-topleft(hef="javascript:void(0)", (onclick)="w3_close()", style="width:100%;font-size:22px") Close Menu
+            .w3-container
+                .w3-padding-64
+                    b Company 
+                        br
+                    b Name
+            
+
+            .w3-bar-block
+                each sidebarPerulangan in [['#','Home'],['#showcase','Showcase'],['#services','Services'],['#designers','Designers'],['#packages','Packages'],['#contact','Contact']]
+                    |
+                    +sidebar(sidebarPerulangan[0], sidebarPerulangan[1])
+                    |
+                    |
+        //  Top menu on small screens
+        header.w3-container.w3-top.w3-hide-large.w3-red.w3-xlarge.w3-padding
+            |
+            |
+            a.w3-button.w3-red.w3-margin-right(href="javascript:void(0)", onclick="w3_open()") ☰
+            span Company Name
+        |
+        |
+        // Overlay effect when opening sidebar on small screens 
+        .w3-overlay.w3-hide-large#myOverlay(onclick="w3_close()" style="cursor:pointer" title="close side menu")
+        |
+        |
+        //- include Page Content
+        // !PAGE CONTENT!
+        include PageContent.pug
+        
+        // W3.CSS Container
+        .w3-light-grey.w3-container.w3-padding-32(style="margin-top:75px;padding-right:58px")
+            p.w3-right 
+                a.w3-hover-opacity(href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank")= w3schools
+
+    script(type="text/javascript" src="script.js")

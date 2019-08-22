@@ -1,0 +1,151 @@
+
+mixin photogrid(gambar_1,back_Alt)
+    img(src="https://www.w3schools.com/w3images/"+gambar_1 style="width:100%" onclick="onClick(this)" alt=back_Alt  )
+
+mixin services_DesignerTemplate(ID,headerPage,p1,p2)
+    .w3-container(id=ID, style="margin-top:75px")
+        h1.w3-xxxlarge.w3-text-red 
+            b= headerPage
+        hr.w3-round(style="width:50px;border:5px solid red")
+        p= p1
+        p= p2
+
+mixin theTeam(gambarTheTeam,alt_gambarTheTeam,namaTeam,p_1Team,p_2Team)
+    .w3-col.m4.w3-margin-bottom
+        .w3-light-grey
+            img(src="https://www.w3schools.com/w3images/"+gambarTheTeam, alt= alt_gambarTheTeam, style="width:100%")
+            .w3-container
+                h3= namaTeam
+                p.w3-opacity= p_1Team
+                p=  p_2Team
+
+    
+
+mixin pricingTables(classPricingIl,HeadPricing,infoPricing,price,room,warnaButton,SignUp)
+    ul(class="w3-ul w3-light-grey w3-center")
+        li(class= classPricingIl+ " w3-xlarge w3-padding-32" )= HeadPricing 
+        each valuePricing in infoPricing.length ? infoPricing : ['There are no values array 1']
+            li.w3-padding-16= valuePricing
+        
+        li.w3-padding-16
+            h2= price
+            span.w3-opacity= room
+        li.w3-light-grey.w3-padding-24
+            button(class=warnaButton+ "w3-button  w3-padding-large w3-hover-black")= SignUp
+
+    //- include Page Content (page)
+.w3-main(style="margin-left:340px;margin-right:40px")
+    //Header 
+    .w3-container#showcase(style="margin-top:80px")
+        h1.w3-jumbo 
+            b  Interior Design
+        h1.w3-xxxlarge.w3-text-red
+            b Showcase
+        hr.w3-round(style="width:50px;border:5px solid red")
+
+
+    |
+    |
+    //Photo grid (modal)
+    -const alt_1= "Concrete meets bricks";
+    -const alt_2= "Light, white and tight scandinavian design";
+    -const alt_3= "White walls with designer chairs";
+    -const alt_4= "Windows for the atrium";
+    -const alt_5= "Bedroom and office in one space";
+    -const alt_6= "Scandinavian design";
+
+    .w3-row-padding
+        .w3-half
+            each photoGridPerulanagan_1 in [["kitchenconcrete.jpg",alt_1],["livingroom.jpg",alt_2],["diningroom.jpg",alt_3]]
+                |
+                +photogrid(photoGridPerulanagan_1[0],photoGridPerulanagan_1[1])
+                |
+                |
+
+        .w3-half
+            each photoGridPerulanagan_1 in [["atrium.jpg",alt_4],["bedroom.jpg",alt_5],["livingroom2.jpg",alt_6]]
+                |
+                +photogrid(photoGridPerulanagan_1[0],photoGridPerulanagan_1[1])
+                |
+                |
+    |
+    // Modal for full size images on click
+    .w3-modal.w3-black#modal01(style="padding-top:0"  onclick="this.style.display='none'")
+        |
+        |
+        span.w3-button.w3-black.w3-xxlarge.w3-display-topright ×
+        .w3-modal-content.w3-animate-zoom.w3-center.w3-transparent.w3-padding-64
+            img.w3-image#img01
+            p#caption
+
+    //- service Data
+    -const ID_1= "services";
+    -const headerPage_1="Services.";
+    -const p1_1="We are a interior design service that focus on what's best for your home and what's best for you!";
+    -const p2_1="Some text about our services - what we do and what we offer. We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+    //- designer Data
+    -const ID_2= "designers";
+    -const headerPage_2="Designers.";
+    -const p1_2="The best team in the world.";
+    -const p2_2="We are lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
+    //- service and desaigner dapat di turunan(inheritance)
+    //services
+    +services_DesignerTemplate(ID_1,headerPage_1,p1_1,p2_1)
+
+    //Designers
+    +services_DesignerTemplate(ID_2,headerPage_2,p1_2,p2_2)
+    //- team John (team 2)
+    -const valuesJohn = ["team2.jpg ","John","John Doe","CEO & Founder","Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum."];
+    //- team jane_Doe (team 1)
+    -const TheTeam_Jane_Doe=["team1.jpg","Jane","Jane Doe","Designer","Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum."];
+    //- team Mike_Ross (team 3)
+    -const TheTeam_Mike_Rose=["team3.jpg","Mike","Mike Ross","Architect","Phasellus eget enim eu lectus faucibus vestibulum. Suspendisse sodales pellentesque elementum.",];
+    -const Team_Array = [valuesJohn,TheTeam_Jane_Doe,TheTeam_Mike_Rose]
+    -let n=0;
+
+    //The Team 
+    .w3-row-padding.w3-grayscale
+        each val in Team_Array.length ? Team_Array : ['There are no values array 1']
+            +theTeam(val[0],val[1],val[2],val[3],val[4])
+                //- theTeam() 
+                //- each printing in val.length ? Team_Array : ['There are no values array 2']
+
+    //Packages / Pricing Tables
+    .w3-container#packages(style="margin-top:75px")
+        h1.w3-xxxlarge.w3-text-red
+            b Packages.
+        hr.w3-round(style="width:50px;border:5px solid red")
+        p Some text our prices. Lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
+
+    -const pricingBasic = ["w3-dark-grey","Basic",["Floorplanning","10 hours support","Photography","20% furniture discoun","Good deals"],"$ 199","per room","w3-white","Sign Up"]; 
+    -const pricingPro = ["w3-red","Pro",["Floorplanning","50 hours support","Photography","50% furniture discount","GREAT deals"],"$ 249","per room","w3-red","Sign Up"] 
+    //- -const pricingSign = []
+
+    .w3-row-padding
+        .w3-half.w3-margin-bottom
+            +pricingTables(pricingBasic[0],pricingBasic[1],pricingBasic[2],pricingBasic[3],pricingBasic[4],pricingBasic[5],pricingBasic[6])
+        .w3-half
+            +pricingTables(pricingPro[0],pricingPro[1],pricingPro[2],pricingPro[3],pricingPro[4],pricingPro[5],pricingPro[6])
+            
+    //- Contact
+    -const ConatactArray = ["Name","Email","Message"]
+    //Contact
+    .w3-container#contact(style="margin-top:75px")
+        h1.w3-xxxlarge.w3-text-red
+            b Contact.
+        hr.w3-round(style="width:50px;border:5px solid red")
+        p Do you want us to style your home? Fill out the form and fill me in with the details :) We love meeting new people!
+        form(action="/action_page.php" target="_blank")
+            each ContactPerulangan in ConatactArray.length  ? ConatactArray : ['There are no values Contact']
+                .w3-section
+                    label=  ContactPerulangan
+                    input.w3-input.w3-border(type="text" name=ContactPerulangan required)
+
+    // End page content
+
+
+    //- mixin pricingTablesSign(price,room,warnaButton,SignUp)
+
+
